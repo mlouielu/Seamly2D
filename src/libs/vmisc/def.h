@@ -35,6 +35,7 @@
 #include <QColorDialog>
 #include <QFileDialog>
 #include <QLineF>
+#include <QPalette>
 #include <QString>
 #include <QStringList>
 #include <Qt>
@@ -589,6 +590,9 @@ Q_REQUIRED_RESULT QMarginsF UnitConvertor(const QMarginsF &margins, const Unit &
 
 void InitLanguages(QComboBox *combobox);
 Q_REQUIRED_RESULT QStringList SupportedLocales();
+
+QPalette  lightPalette();
+QPalette  darkPalette();
 
 QString makeHeaderName(const QString &name);
 Q_REQUIRED_RESULT QString strippedName(const QString &fullFileName);
