@@ -74,7 +74,7 @@ SeamlyMePreferencesConfigurationPage::SeamlyMePreferencesConfigurationPage(QWidg
 
     //-------------------- Startup
     // Theme
-    ui->theme_ComboBox->addItem(tr("Fusion Lght"), 0);
+    ui->theme_ComboBox->addItem(tr("Fusion Light"), 0);
     ui->theme_ComboBox->addItem(tr("Fusion Dark"), 1);
     ui->theme_ComboBox->addItem(tr("System"), 2);
 

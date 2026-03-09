@@ -66,7 +66,7 @@ SeamlyWelcomeDialog::SeamlyWelcomeDialog(QWidget *parent)
             this, &SeamlyWelcomeDialog::languageChanged);
 
     //-------------------- Theme setup
-    ui->theme_ComboBox->addItem(tr("Fusion Lght"), 0);
+    ui->theme_ComboBox->addItem(tr("Fusion Light"), 0);
     ui->theme_ComboBox->addItem(tr("Fusion Dark"), 1);
     ui->theme_ComboBox->addItem(tr("System"), 2);
 
