@@ -134,6 +134,7 @@
 #include <QtDebug>
 #include <QtGlobal>
 #include <QUndoStack>
+#include <QToolTip>
 
 // compiler directives
 #if defined(Q_OS_MAC)
@@ -1946,6 +1947,33 @@ void MainWindow::customEvent(QEvent *event)
     {
         qApp->getUndoStack()->undo();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::ToolTip)
+	{
+        // Cast to a help event to get the coordinates
+        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+
+        // Cast the object to a widget so we can get its tooltip text
+        QWidget *widget = qobject_cast<QWidget *>(obj);
+
+        if (widget && !widget->toolTip().isEmpty())
+		{
+            // Show the tooltip with an offset to top-right position
+			// This can prevent tooltip be blocked by cursor
+            QToolTip::showText(helpEvent->globalPos() + QPoint(20, -60),
+                               widget->toolTip(),
+                               widget);
+
+            return true;
+        }
+    }
+
+	// Pass everything else through to the original widget
+    return MainWindowsNoGUI::eventFilter(obj, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6376,6 +6404,8 @@ void MainWindow::createActions()
     connect(ui->pieces_Action,        &QAction::triggered, this, &MainWindow::handlePieceMenu);
     connect(ui->layout_Action,        &QAction::triggered, this, &MainWindow::handleLayoutMenu);
     connect(ui->images_Action,        &QAction::triggered, this, &MainWindow::handleImagesMenu);
+
+    qApp->installEventFilter(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

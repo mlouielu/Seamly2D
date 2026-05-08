@@ -165,6 +165,7 @@ protected:
     virtual void CleanLayout() override;
     virtual void PrepareSceneList() override;
     virtual void exportToCSVData(const QString &fileName, const DialogExportToCSV &dialog) final;
+    virtual bool eventFilter(QObject *obj, QEvent *event) override;
     void         handleExportToCSV();
 
 private slots:
